@@ -1,0 +1,46 @@
+---
+title: "Tips Exploration"
+author: "Ben Wagner"
+date: "6/27/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Load Libraries
+```{r}
+library(readxl)
+library(dplyr)
+library(stringdist)
+```
+
+## Load Data 
+```{r}
+tips2022<-read_excel("C:\\Users\\littl\\OneDrive\\Desktop\\IAA_TIPS\\Copy of MSA 2023 STUDENT TIPS spreadsheet.xlsx", skip = 1, sheet = "2022", col_names = c('tip_1', 'tip_2', 'tip_3', 'anything_else'))
+
+tips2021<-read_excel("C:\\Users\\littl\\OneDrive\\Desktop\\IAA_TIPS\\Copy of MSA 2023 STUDENT TIPS spreadsheet.xlsx", skip = 1, sheet = "2021", col_names = c('tip_1', 'tip_2', 'tip_3', 'anything_else'))
+
+tips2020<-read_excel("C:\\Users\\littl\\OneDrive\\Desktop\\IAA_TIPS\\Copy of MSA 2023 STUDENT TIPS spreadsheet.xlsx", skip=1, sheet = "2020", col_names = c('tip_1', 'tip_2', 'tip_3', 'anything_else'))
+
+tips2019<-read_excel("C:\\Users\\littl\\OneDrive\\Desktop\\IAA_TIPS\\Copy of MSA 2023 STUDENT TIPS spreadsheet.xlsx", skip = 1, sheet = "2019", col_names = c('tip_1', 'tip_2', 'tip_3', 'anything_else'))
+
+tips2018<-read_excel("C:\\Users\\littl\\OneDrive\\Desktop\\IAA_TIPS\\Copy of MSA 2023 STUDENT TIPS spreadsheet.xlsx", skip = 1, sheet = "2018", col_names = c('tip_1', 'tip_2', 'tip_3', 'anything_else'))
+
+tips2017<-read_excel("C:\\Users\\littl\\OneDrive\\Desktop\\IAA_TIPS\\Copy of MSA 2023 STUDENT TIPS spreadsheet.xlsx", skip = 1, sheet = "2017", col_names = c('tip_1', 'tip_2', 'tip_3', 'anything_else'))
+
+tips2016<-read_excel("C:\\Users\\littl\\OneDrive\\Desktop\\IAA_TIPS\\Copy of MSA 2023 STUDENT TIPS spreadsheet.xlsx", skip = 1, sheet = "2016", col_names = c('tip_1', 'tip_2', 'tip_3', 'anything_else'))
+```
+
+## Counting the frequency of words
+```{r}
+frequency <- data.frame(t(stringdist::qgrams(freq = tips2022, q=25)))
+
+frequency<-frequency %>% 
+  arrange(desc(freq))
+```
+
+
+
+
