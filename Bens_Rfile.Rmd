@@ -14,6 +14,10 @@ knitr::opts_chunk$set(echo = TRUE)
 library(readxl)
 library(dplyr)
 library(stringdist)
+library(topicmodels)
+library(tm)
+library(SnowballC)
+library(stopwords)
 ```
 
 ## Load Data 
@@ -41,6 +45,22 @@ frequency<-frequency %>%
   arrange(desc(freq))
 ```
 
+## Clustering
+```{r, warning=FALSE}
+corpus <- Corpus(VectorSource(tips2021))
+corpus <- tm_map(corpus, removeWords, "program")
+corpus <- tm_map(corpus, removeWords, "a")
+corpus <- tm_map(corpus, removeWords, "get")
+corpus <- tm_map(corpus, removeWords, stopwords('english'))
+corpus <- tm_map(corpus, removePunctuation)
+corpus <- tm_map(corpus, stemDocument)
 
+TF <- DocumentTermMatrix(corpus, control = list(weighting = weightTf))
+
+lda.output <- LDA(TF, k=5)
+terms(lda.output)
+
+cbind(df, terms(lda.output)[topics(lda.output)])
+```
 
 
