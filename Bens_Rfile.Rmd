@@ -210,6 +210,11 @@ level_order<- c("learn", "python", "notes", "time", "program", "classmates", "fr
 ggplot(data = freq_terms_visual, aes(x=year, y=factor(Term, levels = level_order), fill=prop_term_to_total_terms)) + 
   geom_tile()+
   theme_bw()+
-  scale_x_continuous()
+  scale_x_continuous()+
+  labs(title="Term Frequency", y="Term")+
+  scale_x_continuous(breaks = c(2016, 2017, 2018, 2019, 2020, 2021, 2022))+
+  guides(fill=guide_legend(title="Percent of Total Terms"))+
+  theme(plot.title = element_text(hjust = 0.5))+
+  scale_fill_gradient(low="#9e7e3e", high = "#000136")
 ```
 
